@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>{{ noticia.titulo }}</h2>
+
+    <p class="text-muted">
+        Publicado em {{ noticia.data_publicacao|date:"d/m/Y H:i" }}
+    </p>
+
+    {% if noticia.imagem %}
+    <img src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}" class="img-fluid mb-3 rounded shadow">
+    {% endif %}
+
+    <p class="fs-5">{{ noticia.conteudo }}</p>
+
+    <a href="{% url 'lista_noticias' %}" class="btn btn-secondary mt-3">← Voltar</a>
+
+</div>
+
+{% endblock %}

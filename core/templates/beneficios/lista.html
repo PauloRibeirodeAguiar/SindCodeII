@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Benefícios Disponíveis</h2>
+
+<div class="row">
+    {% for beneficio in beneficios %}
+    <div class="col-md-4">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ beneficio.nome }}</h5>
+                <p class="card-text">{{ beneficio.descricao|truncatewords:20 }}</p>
+                <a href="/beneficios/{{ beneficio.id }}/" class="btn btn-success btn-sm">Ver benefício</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-warning">Nenhum benefício disponível.</div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

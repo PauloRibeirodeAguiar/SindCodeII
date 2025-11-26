@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>{{ beneficio.nome }}</h2>
+
+{% if beneficio.imagem %}
+<img src="{{ beneficio.imagem.url }}" class="img-fluid mb-4 rounded shadow">
+{% endif %}
+
+<p class="fs-5">{{ beneficio.descricao }}</p>
+
+<a href="/beneficios/" class="btn btn-secondary mt-3">← Voltar</a>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Resultados da pesquisa{% if query %} para "{{ query }}"{% endif %}</h2>
+
+<ul class="list-group mt-3">
+    {% for noticia in noticias %}
+    <li class="list-group-item">
+        <h5>{{ noticia.titulo }}</h5>
+        <p>{{ noticia.resumo }}</p>
+        <a href="{% url 'detalhe_noticia' noticia.id %}" class="btn btn-sm btn-primary">Ler mais</a>
+    </li>
+    {% empty %}
+    <li class="list-group-item">Nenhuma notícia encontrada.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

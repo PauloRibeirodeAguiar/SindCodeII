@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="mb-4">SINDCODE — Sindicato dos Programadores</h1>
+
+<h3 class="mb-3">Últimas Notícias</h3>
+<div class="row">
+    {% for n in noticias %}
+    <div class="col-md-4">
+        <div class="card shadow-sm mb-4">
+            {% if n.imagem %}
+            <img src="{{ n.imagem.url }}" class="card-img-top" style="height: 180px; object-fit: cover;">
+            {% endif %}
+            <div class="card-body">
+                <h5>{{ n.titulo }}</h5>
+                <p class="text-muted">{{ n.data_publicacao|date:"d/m/Y" }}</p>
+                <a href="/noticias/{{ n.id }}/" class="btn btn-primary btn-sm">Ler mais</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<hr>
+
+<h3 class="mt-4 mb-3">Benefícios aos Associados</h3>
+<div class="row">
+    {% for b in beneficios %}
+    <div class="col-md-4">
+        <div class="card shadow-sm mb-4">
+            {% if b.imagem %}
+            <img src="{{ b.imagem.url }}" class="card-img-top" style="height: 180px; object-fit: cover;">
+            {% endif %}
+            <div class="card-body">
+                <h5>{{ b.nome }}</h5>
+                <a href="/beneficios/{{ b.id }}/" class="btn btn-success btn-sm">Ver benefício</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

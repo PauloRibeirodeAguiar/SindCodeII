@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Contato</h2>
+<p class="text-muted">Fale com o SindCode.</p>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>Nome</label>
+        <input type="text" class="form-control" name="nome">
+    </div>
+
+    <div class="mb-3">
+        <label>E-mail</label>
+        <input type="email" class="form-control" name="email">
+    </div>
+
+    <div class="mb-3">
+        <label>Mensagem</label>
+        <textarea class="form-control" name="mensagem" rows="5"></textarea>
+    </div>
+
+    <button class="btn btn-primary">Enviar</button>
+</form>
+
+{% endblock %}

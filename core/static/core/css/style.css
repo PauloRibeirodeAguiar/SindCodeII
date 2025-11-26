@@ -1,0 +1,21 @@
+ body {
+            background-color: #f7f7f7;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+        footer {
+            margin-top: 228px;
+            padding: 5px;
+            background: #1a1a1a;
+            color: #ddd;
+            text-align: center;
+        }
+        .footer-link {
+            color: #ffffff;
+            text-decoration: none;
+        }
+        .footer-link:hover {
+            text-decoration: underline;
+        }

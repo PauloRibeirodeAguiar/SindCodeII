@@ -1,0 +1,19 @@
+USE sindcode_full;
+
+INSERT INTO noticias_categoria VALUES
+(NULL, "Tecnologia das coisas.");
+
+INSERT INTO noticias_noticia (titulo, conteudo, data_publicacao, categoria_id)
+VALUES (
+    'SindCode inaugura novo espaço para associados',
+    'A nova sede do SindCode foi inaugurada nesta sexta-feira com a presença de diversos associados.',
+    NOW(),
+    1
+);
+INSERT INTO noticias_noticia (titulo, conteudo, data_publicacao, categoria_id)
+VALUES (
+    'SindCode inaugura novo espaço para associados',
+    'A nova sede do SindCode foi inaugurada nesta sexta-feira com a presença de diversos associados.',
+    NOW(),
+    1
+);
