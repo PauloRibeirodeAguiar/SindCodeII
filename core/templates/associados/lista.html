@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mb-4">Lista de Associados</h1>
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Nome Completo</th>
+            <th>CPF</th>
+            <th>Data de Nascimento</th>
+            <th>Benefício</th>
+            <th>Detalhes</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for associado in associados %}
+        <tr>
+            <td>{{ associado.nome_completo }}</td>
+            <td>{{ associado.cpf }}</td>
+            <td>{{ associado.data_nascimento|date:"d/m/Y" }}</td>
+            <td>
+                {% if associado.fk_beneficio and associado.fk_beneficio.nome != "Curso de Inglês" %}
+                    {{ associado.fk_beneficio.nome }}
+                {% else %}
+                    Nenhum benefício disponível
+                {% endif %}
+            </td>
+            <td>
+                <a class="btn btn-primary btn-sm" href="{% url 'associado_detalhe' associado.id %}">Ver</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

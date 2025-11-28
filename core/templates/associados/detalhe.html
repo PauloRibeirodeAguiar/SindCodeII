@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="mb-4">Detalhes do Associado</h1>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">{{ associado.nome_completo }}</h5>
+        <p><strong>Nome Social:</strong> {{ associado.nome_social }}</p>
+        <p><strong>CPF:</strong> {{ associado.cpf }}</p>
+        <p><strong>RG:</strong> {{ associado.rg }}</p>
+        <p><strong>Gênero:</strong> {{ associado.genero }}</p>
+        <p><strong>Data de Nascimento:</strong> {{ associado.data_nascimento|date:"d/m/Y" }}</p>
+
+        {% if associado.fk_beneficio %}
+            <p><strong>Benefício:</strong> {{ associado.fk_beneficio.nome }}</p>
+        {% endif %}
+    </div>
+</div>
+
+<h3>Endereços</h3>
+<ul class="list-group mb-3">
+    {% for endereco in associado.endereco_set.all %}
+        <li class="list-group-item">{{ endereco.logradouro }}, {{ endereco.numero }} - {{ endereco.cidade }}/{{ endereco.uf }}</li>
+    {% empty %}
+        <li class="list-group-item">Sem endereços cadastrados.</li>
+    {% endfor %}
+</ul>
+
+<h3>Telefones</h3>
+<ul class="list-group mb-3">
+    {% for telefone in associado.telefone_set.all %}
+        <li class="list-group-item">{{ telefone.telefone }}</li>
+    {% empty %}
+        <li class="list-group-item">Sem telefones cadastrados.</li>
+    {% endfor %}
+</ul>
+
+<h3>Emails</h3>
+<ul class="list-group mb-3">
+    {% for email in associado.email_set.all %}
+        <li class="list-group-item">{{ email.email }}</li>
+    {% empty %}
+        <li class="list-group-item">Sem emails cadastrados.</li>
+    {% endfor %}
+</ul>
+
+<a class="btn btn-secondary" href="{% url 'associados_lista' %}">Voltar à lista</a>
+{% endblock %}

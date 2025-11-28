@@ -1,5 +1,9 @@
 from django.db import models
 
+# --------------------------
+# MODELOS PRINCIPAIS
+# --------------------------
+
 class Beneficio(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField()
@@ -9,7 +13,6 @@ class Beneficio(models.Model):
     publico_alvo = models.CharField(max_length=100, null=True, blank=True)
     valor_subsidiado = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     valor_total = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    url_imagem = models.CharField(max_length=255, null=True, blank=True)
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
 
@@ -63,19 +66,16 @@ class Categoria(models.Model):
         return self.nome
 
 
-# core/models.py
-from django.db import models
+# --------------------------
+# NOTÍCIAS
+# --------------------------
 
 class Noticia(models.Model):
     titulo = models.CharField(max_length=200)
-    resumo = models.TextField(default='Sem resumo')  # Valor padrão para evitar erros em registros antigos
+    resumo = models.TextField(default='Sem resumo')
     conteudo = models.TextField()
-    data_publicacao = models.DateTimeField(auto_now_add=True)  # Use DateTimeField para permitir hora e data
+    data_publicacao = models.DateTimeField(auto_now_add=True)
     imagem = models.ImageField(upload_to='noticias/', blank=True, null=True)
-
-    def __str__(self):
-        return self.titulo
-
 
     DESTAQUE_CHOICES = [
         ('nenhum', 'Nenhum'),
@@ -84,7 +84,6 @@ class Noticia(models.Model):
         ('alto', 'Alto'),
         ('maximo', 'Máximo'),
     ]
-
     destaque = models.CharField(max_length=10, choices=DESTAQUE_CHOICES, default='nenhum')
 
     fk_autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
@@ -93,6 +92,10 @@ class Noticia(models.Model):
     def __str__(self):
         return self.titulo
 
+
+# --------------------------
+# CONTATOS
+# --------------------------
 
 class Telefone(models.Model):
     telefone = models.CharField(max_length=20, null=True, blank=True)
@@ -111,6 +114,10 @@ class Email(models.Model):
     def __str__(self):
         return self.email
 
+
+# --------------------------
+# BENEFÍCIOS
+# --------------------------
 
 class TipoBeneficio(models.Model):
     tipo_beneficio = models.CharField(max_length=80)

@@ -1,24 +1,21 @@
-# sindcode/settings.py
 from pathlib import Path
-from dotenv import load_dotenv
-load_dotenv()
 import os
 
-
-# Caminho base do projeto
+# --------------------------
+# BASE DIR
+# --------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# -----------------------
-# CONFIGURAÇÕES DE SEGURANÇA
-# -----------------------
-SECRET_KEY = os.getenv("SECRET_KEY")
+# --------------------------
+# SEGURANÇA
+# --------------------------
+SECRET_KEY = 'sua_chave_secreta_aqui'  # Troque pela sua chave real
+DEBUG = True  # False em produção
+ALLOWED_HOSTS = []  # Adicione o domínio quando publicar
 
-DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
-# -----------------------
+# --------------------------
 # APPS INSTALADOS
-# -----------------------
+# --------------------------
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -26,39 +23,39 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',  # Seu app principal
+    'core',  # seu app principal
 ]
 
-# -----------------------
+# --------------------------
 # MIDDLEWARE
-# -----------------------
+# --------------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # ESSENCIAL
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# -----------------------
-# URL CONFIG
-# -----------------------
+# --------------------------
+# URLS
+# --------------------------
 ROOT_URLCONF = 'sindcode.urls'
 
-# -----------------------
+# --------------------------
 # TEMPLATES
-# -----------------------
+# --------------------------
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'core' / 'templates'],  # templates globais do app core
+        'DIRS': [os.path.join(BASE_DIR, 'core', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
+                'django.template.context_processors.request',  # Necessário para request.user
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -66,62 +63,67 @@ TEMPLATES = [
     },
 ]
 
-# -----------------------
+# --------------------------
 # WSGI
-# -----------------------
+# --------------------------
 WSGI_APPLICATION = 'sindcode.wsgi.application'
 
-# -----------------------
-# DATABASE
-# -----------------------
+# --------------------------
+# BANCO DE DADOS (SQLite padrão)
+# --------------------------
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sindcode_full',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
-# -----------------------
-# PASSWORD VALIDATION
-# -----------------------
+# --------------------------
+# SENHAS
+# --------------------------
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
 
-# -----------------------
+# --------------------------
 # INTERNACIONALIZAÇÃO
-# -----------------------
+# --------------------------
 LANGUAGE_CODE = 'pt-br'
 TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
 USE_TZ = True
 
-# -----------------------
+# --------------------------
 # ARQUIVOS ESTÁTICOS
-# -----------------------
-# Django automaticamente busca pastas "static/" dentro de cada app
+# --------------------------
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core', 'static')]
 
-# Onde os arquivos coletados serão colocados em produção (collectstatic)
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# -----------------------
+# --------------------------
 # ARQUIVOS DE MÍDIA
-# -----------------------
+# --------------------------
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# -----------------------
-# DEFAULT PRIMARY KEY FIELD TYPE
-# -----------------------
+# --------------------------
+# LOGIN / LOGOUT
+# --------------------------
+LOGIN_URL = 'login'           # Redireciona se não estiver logado
+LOGIN_REDIRECT_URL = 'home'   # Redireciona após login
+LOGOUT_REDIRECT_URL = 'login' # Redireciona após logout
+
+# --------------------------
+# DEFAULT AUTO FIELD
+# --------------------------
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

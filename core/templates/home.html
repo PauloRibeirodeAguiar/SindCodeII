@@ -22,23 +22,5 @@
     {% endfor %}
 </div>
 
-<hr>
-
-<h3 class="mt-4 mb-3">Benefícios aos Associados</h3>
-<div class="row">
-    {% for b in beneficios %}
-    <div class="col-md-4">
-        <div class="card shadow-sm mb-4">
-            {% if b.imagem %}
-            <img src="{{ b.imagem.url }}" class="card-img-top" style="height: 180px; object-fit: cover;">
-            {% endif %}
-            <div class="card-body">
-                <h5>{{ b.nome }}</h5>
-                <a href="/beneficios/{{ b.id }}/" class="btn btn-success btn-sm">Ver benefício</a>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
 
 {% endblock %}
